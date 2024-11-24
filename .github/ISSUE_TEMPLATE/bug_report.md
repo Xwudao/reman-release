@@ -1,6 +1,8 @@
 ---
 name: Bug 提交
 about: 使用此模板来提交一个 bug
+title: '【BUG】这里添加简要描述'
+labels: ['bug']
 ---
 
 # BUG 提交
