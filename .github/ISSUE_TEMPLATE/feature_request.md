@@ -1,6 +1,8 @@
 ---
 name: 功能请求
 about: 使用此模板来提交一个功能请求。
+title: '【FEAT】这里添加简要描述'
+labels: ['feat']
 ---
 
 # 功能请求
