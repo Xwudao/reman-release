@@ -1,0 +1,26 @@
+  name: add label of non_standard Issue
+
+  on:
+    issues:
+      types: [opened, edited]
+
+  jobs:
+    check-issue:
+      runs-on: ubuntu-latest
+      steps:
+        - id: check-issue # 必须使用id,不然不能访问到运行结果
+          uses: actions-cool/issues-helper@v3
+          with:
+            actions: "check-issue"
+            token: ${{ secrets.GITHUB_TOKEN }}
+            issue-number: ${{ github.event.issue.number }}
+            title-includes: "【,BUG,】" # 标题包含['【','BUG','】']
+            body-includes: "问题描述,问题复现步骤" # 内容包含 ['问题描述','问题复现步骤']
+        - name: add-label
+          uses: actions-cool/issues-helper@v3
+          if: ${{steps.check-issue.outputs.check-result == 'true'}} # 如果判断条件是 'true', 继续运行
+          with:
+            actions: "add-labels"
+            token: ${{ secrets.GITHUB_TOKEN }}
+            issue-number: ${{ github.event.issue.number }} # 当前Issue的编号
+            labels: "bug" # 添加标签: 'bug'
